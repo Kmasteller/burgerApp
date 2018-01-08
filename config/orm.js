@@ -1,11 +1,18 @@
 // Import MySQL connection.
-var connection = require("../config/connection.js");
+var connection = require('./connection.js');
 
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  };
+  console.log('connected as id ' + connection.threadId);
+});
 
 // Object for all our SQL statement functions.
 var orm = {
-  all: function (tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput;
+  all: function (cb) {
+    var queryString = "SELECT * FROM burgers";
     connection.query(queryString, function (err, result) {
       if (err) {
         throw err;
@@ -13,25 +20,29 @@ var orm = {
       cb(result);
     });
   },
-  create: function (table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
 
-    console.log(queryString);
-
-    connection.query(queryString, vals, function (err, result) {
+  // Create function
+  create: function(burger_name, cb){
+    var queryString = 'INSERT INTO burgers SET ?';
+    // mySQL Query
+    connection.query(queryString, {
+      burger_name: burger_name,
+      devoured: false
+    }, function (err, result) {
       if (err) {
-        throw err;
+      throw err;
       }
-
       cb(result);
     });
   },
-  // An example of objColVals would be {name: panther, sleepy: true}
-  update: function (table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
+
+
+//  update function
+  update: function (burgerID, cb) {
+    var queryString = "UPDATE burgers SET ? WHERE ?";
 
     console.log(queryString);
-    connection.query(queryString, function (err, result) {
+    connection.query(queryString, [{devoured: true}, {id: burgerID}], function(err, result) {
       if (err) {
         throw err;
       }
