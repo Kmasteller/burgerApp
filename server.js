@@ -8,7 +8,6 @@ var app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.use(methodOveride("_method"));
@@ -23,7 +22,6 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/burgers_controller.js");
 
 app.use("/", routes);
-
 app.listen(port, function () {
-console.log("we are running on port " + port)
+    console.log("we are running on port " + port)
 });
