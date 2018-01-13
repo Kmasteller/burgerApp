@@ -30,13 +30,12 @@ router.post("/burger/eat/:id", function(req, res) {
   });
 });
 
-// router.delete('/api/burgers/:id', function (req, res, next) {
-//
-//   console.log(req.params.id)
-//   burger.delete("burgers", req.params.id, function (data) {
-//     res.json(data)
-//   })
-// })
-
+router.delete('/api/delete/:id', function (req, res) {
+  // console.log(req.params.id)
+  burger.delete(req.params.id, function () {
+    res.redirect("/home");
+  })
+});
+// burger.delete("burgers", req.params.id, function (data) {
 // Export routes for server.js to use.
 module.exports = router;

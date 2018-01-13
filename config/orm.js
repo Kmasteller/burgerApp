@@ -32,8 +32,19 @@ var orm = {
 //  update function
   update: function(burgerID, cb) {
     var queryString = "UPDATE burgers SET ? WHERE ?";
-    console.log(queryString);
+    // console.log(queryString);
     connection.query(queryString, [{devoured: true}, {id: burgerID}], function(err, res) {
+      if(err) {
+        throw err;
+      }
+      cb(res);
+    });
+  },
+
+  delete: function(burger_ID, cb) {
+    var queryString = "DELETE FROM burgers SET ? WHERE ?";
+    // console.log(queryString);
+    connection.query(queryString, [{id: burgerID}], function(err, res) {
       if(err) {
         throw err;
       }
