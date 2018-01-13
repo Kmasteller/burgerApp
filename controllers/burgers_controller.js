@@ -19,22 +19,25 @@ router.get("/home", function(req, res) {
 });
 
 router.post("/burger/create", function(req, res) {
-  burger.create(req.body.burger_name, function() {
+  burger.create(req.body.burger_name, function(data) {
+    console.log(data);
   res.redirect("/home");
     });
 });
 
 router.post("/burger/eat/:id", function(req, res) {
-  burger.update(req.params.id, function() {
+  burger.update(req.params.id, function(data) {
+    console.log(data);
     res.redirect("/home");
   });
 });
 
-router.delete('/api/delete/:id', function (req, res) {
+router.post('/burger/delete/:id', function (req, res) {
   // console.log(req.params.id)
-  burger.delete(req.params.id, function () {
+  burger.delete(req.params.id, function (data) {
+    console.log(data);
     res.redirect("/home");
-  })
+  });
 });
 // burger.delete("burgers", req.params.id, function (data) {
 // Export routes for server.js to use.

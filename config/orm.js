@@ -41,9 +41,9 @@ var orm = {
     });
   },
 
-  delete: function(burger_ID, cb) {
-    var queryString = "DELETE FROM burgers SET ? WHERE ?";
-    // console.log(queryString);
+  delete: function(burgerID, cb) {
+    var queryString = "DELETE FROM burgers WHERE ?";
+    console.log("We're running");
     connection.query(queryString, [{id: burgerID}], function(err, res) {
       if(err) {
         throw err;

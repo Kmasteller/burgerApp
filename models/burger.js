@@ -19,8 +19,16 @@ var burger = {
     orm.update(burger_id, function(res) {
       cb(res);
     });
+  },
+
+  delete: function (burger_id, cb) {
+    orm.delete(burger_id, function(res) {
+      cb(res);
+    });
   }
 };
+
+
 
 // Export the database functions for the controller (burgers_controller.js).
 module.exports = burger;
